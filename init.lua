@@ -314,6 +314,22 @@ require('lazy').setup({
         end,
         desc = 'Terminate',
       },
+
+      {
+        '<leader>do',
+        function()
+          require('dap').step_over()
+        end,
+        desc = 'Toggle Breakpoint',
+      },
+
+      {
+        '<leader>di',
+        function()
+          require('dap').step_into()
+        end,
+        desc = 'Toggle Breakpoint',
+      },
     },
   },
 
@@ -343,6 +359,52 @@ require('lazy').setup({
     dependencies = {
       'mfussenegger/nvim-dap',
       'williamboman/mason.nvim',
+    },
+  },
+
+  -- Copied from https://www.johntobin.ie/blog/debugging_in_neovim_with_nvim-dap/
+  {
+    'mfussenegger/nvim-dap-python',
+    lazy = true,
+    config = function()
+      local python = vim.fn.expand '~/.local/share/nvim/mason/packages/debugpy/venv/bin/python'
+      require('dap-python').setup(python)
+    end,
+    -- Consider the mappings at
+    -- https://github.com/mfussenegger/nvim-dap-python?tab=readme-ov-file#mappings
+    dependencies = {
+      'mfussenegger/nvim-dap',
+    },
+  },
+
+  -- Copied from https://www.johntobin.ie/blog/debugging_in_neovim_with_nvim-dap/
+  {
+    'theHamsta/nvim-dap-virtual-text',
+    config = true,
+    dependencies = {
+      'mfussenegger/nvim-dap',
+    },
+  },
+
+  -- Copied from https://www.johntobin.ie/blog/debugging_in_neovim_with_nvim-dap/
+  {
+    'rcarriga/nvim-dap-ui',
+    config = true,
+    keys = {
+      {
+        '<leader>du',
+        function()
+          require('dapui').toggle {}
+        end,
+        desc = 'Dap UI',
+      },
+    },
+    dependencies = {
+      'jay-babu/mason-nvim-dap.nvim',
+      --      "leoluz/nvim-dap-go",
+      'mfussenegger/nvim-dap-python',
+      'nvim-neotest/nvim-nio',
+      'theHamsta/nvim-dap-virtual-text',
     },
   },
 
