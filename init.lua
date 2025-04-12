@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -275,6 +275,39 @@ require('lazy').setup({
       },
     },
   },
+
+  -- Copied from https://www.johntobin.ie/blog/debugging_in_neovim_with_nvim-dap/
+  {
+    "mfussenegger/nvim-dap",
+    lazy = true,
+    -- Copied from LazyVim/lua/lazyvim/plugins/extras/dap/core.lua and
+    -- modified.
+    keys = {
+      {
+        "<leader>db",
+        function() require("dap").toggle_breakpoint() end,
+        desc = "Toggle Breakpoint"
+      },
+
+      {
+        "<leader>dc",
+        function() require("dap").continue() end,
+        desc = "Continue"
+      },
+
+      {
+        "<leader>dC",
+        function() require("dap").run_to_cursor() end,
+        desc = "Run to Cursor"
+      },
+
+      {
+        "<leader>dT",
+        function() require("dap").terminate() end,
+        desc = "Terminate"
+      },
+    },
+  }
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
